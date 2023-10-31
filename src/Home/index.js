@@ -3,13 +3,18 @@ import style from "./style";
 import { TextInput } from "react-native";
 import { TouchableOpacity } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Context } from "../../data/context";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Home(){
 
-    const [nome,setNome] = useState('')
-    const [cpf,setCpf] = useState('')
-    const [rendimento,setRendimento] = useState('')
+    const Navigation = useNavigation()
+    const {registrar} = useContext(Context)
+
+    const [nome,setNome] = useState()
+    const [cpf,setCpf] = useState()
+    const [rendimento,setRendimento] = useState()
 
     return(
         <View style={style.container}>
@@ -19,18 +24,27 @@ export default function Home(){
                 <Text style={style.titulo}>Imposto de Renda</Text>
             </View>
             <View>
-                <Text style={style.instrucoes}>Insira as informações abaixo</Text>
+                <Text>Insira as informações abaixo</Text>
             </View>
             <View style={style.form}>
                 <TextInput onChangeText={(text)=>{setNome(text)}} style={style.input} placeholder="Nome completo" />
                 <TextInput onChangeText={(text)=>{setCpf(text)}} style={style.input} placeholder="CPF" />
                 <TextInput onChangeText={(text)=>{setRendimento(text)}} style={style.input} placeholder="Rendimento anual" />
                 <View style={style.btn_area}>
-                    <TouchableOpacity style={style.btn}>
+                    <TouchableOpacity onPress={()=>{
+                        registrar([0, nome,cpf,rendimento])
+                    }} style={style.btn}>
                         <AntDesign name="plus" size={style.plus.size} color={style.plus.color} />
                     </TouchableOpacity>
                 </View>
             </View>
+            <TouchableOpacity onPress={()=>{
+                Navigation.navigate('cadastros')
+            }} style={style.bottom_btn}>
+                <View style={style.col}/>
+                <View style={style.col}><Text style={[style.bottom_btn__text, style.btn_text__bold]}>Conferir</Text><Text style={style.bottom_btn__text}>Cadastros</Text></View>
+                <View style={style.col}><AntDesign name="right" size={style.right.size} color={style.right.color} /></View>
+            </TouchableOpacity>
         </View>
     )
 }

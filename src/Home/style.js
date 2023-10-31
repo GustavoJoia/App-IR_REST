@@ -68,6 +68,32 @@ const style = StyleSheet.create({
     plus:{
         size: '1.5rem',
         color: '#fff'
+    },
+    bottom_btn:{
+        flexDirection: 'row',
+        backgroundColor: '#fff',
+        width: '75%',
+        height: '10%',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        position: 'absolute',
+        bottom: 0,
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    col:{
+        width: '30%'
+    },
+    right:{
+        size: '1.5rem',
+        color: '#000'
+    },
+    bottom_btn__text:{
+        fontSize: '1.1rem',
+        fontWeight: '500'
+    },
+    btn_text__bold:{
+        fontWeight: 'bold'
     }
 
 })

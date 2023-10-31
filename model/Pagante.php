@@ -104,21 +104,21 @@
                 $valor = ($rendimento - 1713.58)  * 0.075;
 
                 $ali = 7.5;
-                $conjunto = [$valor,$ali];
+                $conjunto = [number_format($valor, 2, '.',''),$ali];
                 return $conjunto;
 
             } else if ($rendimento < 45012.61) {
                 $valor = ($rendimento - 4257.57) * 0.15;
 
                 $ali = 15;
-                $conjunto = [$valor,$ali];
+                $conjunto = [number_format($valor, 2,'.',''),$ali];
                 return $conjunto;
 
             } else if ($rendimento < 55976.17) {
                 $valor = ($rendimento - 7633.51) * 0.225;
 
                 $ali = 22.5;
-                $conjunto = [$valor,$ali];
+                $conjunto = [number_format($valor, 2, '.',''),$ali];
 
                 return $conjunto;
 
@@ -126,7 +126,7 @@
                 $valor = ($rendimento - 10432.32) * 0.275;
 
                 $ali = 27.5;
-                $conjunto = [$valor,$ali];
+                $conjunto = [number_format($valor, 2, '.',''),$ali];
 
                 return $conjunto;
             }
