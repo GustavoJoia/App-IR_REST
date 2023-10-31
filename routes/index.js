@@ -25,16 +25,6 @@ export default function Routes(){
                         }}
                     />
                     <Drawer.Screen
-                        name='resultado'
-                        component={Resultado}
-                        options={{
-                            headerTitle: '',
-                            headerStyle:{
-                                backgroundColor: '#170073',
-                            }
-                        }}
-                    />
-                    <Drawer.Screen
                         name='cadastros'
                         component={Cadastros}
                         options={{
@@ -45,6 +35,16 @@ export default function Routes(){
                         }}
                     />
                 </Drawer.Navigator>
+                <Drawer.Screen
+                        name='resultado'
+                        component={Resultado}
+                        options={{
+                            headerTitle: '',
+                            headerStyle:{
+                                backgroundColor: '#170073',
+                            }
+                        }}
+                    />
             </Provider>
         </NavigationContainer>
     )
