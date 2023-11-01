@@ -1,51 +1,70 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createStackNavigator } from "@react-navigation/stack";
+import { AntDesign } from '@expo/vector-icons';
 import { Provider } from "../data/context";
-
-import Home from "../src/Home";
+import Drawer from "./drawer";
 import Resultado from "../src/Resultado";
-import Cadastros from "../src/Cadastros";
+import Editar from "../src/Editar";
+import Deletar from "../src/Deletar";
 
 export default function Routes(){
 
-    const Drawer = createDrawerNavigator()
+    const Stack = createStackNavigator()
 
     return(
         <NavigationContainer>
             <Provider>
-                <Drawer.Navigator initialRouteName='cadastros'>
-                    <Drawer.Screen
+                <Stack.Navigator>
+                    <Stack.Screen
                         name='home'
-                        component={Home}
+                        component={Drawer}
                         options={{
-                            headerTitle: '',
-                            headerStyle:{
-                                backgroundColor: '#170073',
-                            }
+                            headerShown: false,
                         }}
                     />
-                    <Drawer.Screen
-                        name='cadastros'
-                        component={Cadastros}
-                        options={{
-                            headerTitle: '',
-                            headerStyle:{
-                                backgroundColor: '#170073',
-                            }
-                        }}
-                    />
-                </Drawer.Navigator>
-                <Drawer.Screen
+                    <Stack.Screen
                         name='resultado'
                         component={Resultado}
                         options={{
                             headerTitle: '',
                             headerStyle:{
                                 backgroundColor: '#170073',
-                            }
+                            },
+                            headerBackImage: ()=>(
+                                <AntDesign name="arrowleft" size={24} color="white" />
+                            ),
                         }}
                     />
+                    <Stack.Screen
+                        name='editar'
+                        component={Editar}
+                        options={{
+                            headerTitle: '',
+                            headerStyle:{
+                                backgroundColor: '#170073',
+                            },
+                            headerBackImage: ()=>(
+                                <AntDesign name="arrowleft" size={24} color="white" />
+                            ),
+                        }}
+                    />
+                    <Stack.Screen
+                        name='deletar'
+                        component={Deletar}
+                        options={{
+                            headerTitle: '',
+                            headerStyle:{
+                                backgroundColor: '#170073',
+                            },
+                            headerBackImage: ()=>(
+                                <AntDesign name="arrowleft" size={24} color="white" />
+                            ),
+                        }}
+                    />
+                </Stack.Navigator>
             </Provider>
         </NavigationContainer>
     )
+    
 }

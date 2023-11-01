@@ -7,14 +7,14 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function Card(pessoa){
 
-    const {moneyFormat} = useContext(Context)
+    const {moneyFormat, cpfFormat} = useContext(Context)
     const Navigation = useNavigation()
 
     return(
         <View style={style.container}>
             <Text style={style.nome}>{pessoa.nomePessoa}</Text>
             <View style={style.info_area}>
-                <Text>{pessoa.cpfPessoa}</Text>
+                <Text>{cpfFormat(pessoa.cpfPessoa)}</Text>
                 <Text>{moneyFormat(parseFloat(pessoa.dividaPessoa))}</Text>
             </View>
             

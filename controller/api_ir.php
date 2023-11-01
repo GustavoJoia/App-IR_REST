@@ -2,6 +2,7 @@
 
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: Content-Type");
+    header("Access-Control-Allow-Methods: *");
     require_once('../model/Pagante.php');
     require_once('../model/Conexao.php');
 
@@ -67,7 +68,7 @@
         $pessoa->setAliquota($divida[1]);
 
         $update = 'UPDATE tbpessoa 
-        SET nomePessoa = ?, cpfPessoa = ?, rendimentoPessoa = ?, dividaPessoa = ?, aliquotaPessoa = ?
+        SET nomePessoa = ?, cpfPessoa = ?, rendimentoPessoa = ?, dividaPessoa = ?, percentualPessoa = ?
         WHERE idPessoa = ?';
         $prepare = $conexao->prepare($update);
         $prepare->bindValue(1, $pessoa->getNome());
@@ -76,6 +77,19 @@
         $prepare->bindValue(4, $pessoa->getDivida());
         $prepare->bindValue(5, $pessoa->getAliquota());
         $prepare->bindValue(6, $pessoa->getId());
+
+        $select = 'SELECT * FROM tbpessoa WHERE idPessoa = ?';
+        $p = $conexao->prepare($select);
+        $p->bindValue(1, $pessoa->getId());
+
+        try{
+            $prepare->execute();
+            $p->execute();
+            $lista = $p->fetch(PDO::FETCH_ASSOC);
+            echo json_encode([true,$lista]);
+        } catch (Exception $e){
+            echo json_encode($e);
+        }
 
     } else if($metodo == 'GET'){
 
@@ -115,11 +129,11 @@
         try{
 
             $prepare->execute();
-            return true;
+            echo json_encode(true);
 
         } catch(Exception $e){
 
-            return false;
+            echo json_encode(false);
 
         }
         

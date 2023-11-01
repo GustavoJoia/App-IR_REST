@@ -50,26 +50,30 @@ const style = StyleSheet.create({
     form:{
         backgroundColor: '#fff',
         width: '80%',
-        height: '58%',
+        height: '50%',
         borderRadius: '20%',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        //justifyContent: 'space-between',
         paddingTop: '10%',
         marginTop: '5%',
         marginBottom: '10%',
         paddingBottom: '8%',
     },
+    info_area:{
+        marginBottom: '10%',
+    },
     nome:{
         fontWeight: '500',
         fontSize: '1.3rem',
-        textAlign: 'center'
+        textAlign: 'left',
+        color: 'rgba(29,28,28,0.57)'
     },
     span:{
         color: '#170073',
     },
     normal:{
         textAlign: 'center',
-        fontSize: '1.1rem'
+        fontSize: '1.4rem'
     },
     desc:{
         textAlign: 'center',
@@ -77,30 +81,33 @@ const style = StyleSheet.create({
         maxWidth: '80%',
     },
     edit_btn:{
-        backgroundColor: '#D9D9D9',
-        width: '15vw',
+        backgroundColor: 'rgba(255,255,255,0.6)',
+        width: '100%',
         height: '15vw',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: '50%',
+        borderRadius: 20,
     },
     delete_btn:{
         backgroundColor: '#D10000',
-        width: '15vw',
+        width: '100%',
         height: '15vw',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: '50%',
+        borderRadius: 20,
+        marginBottom: '2%',
     },
     icon:{
         size: '2.1rem',
         color: '#000'
     },
     btn_area:{
-        width: '65%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        width: '60%',
         alignItems: 'center'
+    },
+    btn_label:{
+        fontSize: '1.3rem',
+        fontWeight: '500'
     }
 
 })

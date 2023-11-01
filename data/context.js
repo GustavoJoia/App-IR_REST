@@ -9,7 +9,7 @@ export function Provider({children}){
 
         buscar('')
 
-    },[user])
+    },[])
 
     const url = 'http://localhost/api_rest/controller/api_ir.php'
     const [registros, setRegistros] = useState([])
@@ -21,7 +21,14 @@ export function Provider({children}){
         return valorFormatado
     }
     
-    function cpfFormat(){
+    function cpfFormat(cpf){
+        // Remove caracteres não numéricos
+        cpf = cpf.replace(/[^\d]/g, '');
+    
+        // Adiciona os separadores
+        cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+    
+        return cpf;
 
     }
 
@@ -70,14 +77,64 @@ export function Provider({children}){
             if(response[0]==true){
                 let user = response[1]
                 setUser(user)
+                buscar('')
                 Navigation.navigate('resultado',{idPessoa: user.idPessoa, nomePessoa: user.nomePessoa, cpfPessoa: user.cpfPessoa, rendimentoPessoa: user.rendimentoPessoa, dividaPessoa: user.dividaPessoa, percentualPessoa: user.percentualPessoa})
             }
         })
 
     }
 
+    function editar(data){
+
+        let opt = {
+            method: 'PUT',
+            mode: 'cors',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }
+
+        fetch(url, opt)
+        .then(response=>response.json())
+        .then(response=>{
+
+            if(response[0]==true){
+            let user = response[1]
+            setUser(user)
+            buscar('')
+            Navigation.navigate('resultado',{idPessoa: user.idPessoa, nomePessoa: user.nomePessoa, cpfPessoa: user.cpfPessoa, rendimentoPessoa: user.rendimentoPessoa, dividaPessoa: user.dividaPessoa, percentualPessoa: user.percentualPessoa})
+            }
+        })
+
+    }
+
+    function apagar(data){
+
+        let opt = {
+            method: 'DELETE',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }
+
+        fetch(url, opt)
+        .then(response=>response.json())
+        .then(response=>{
+            if(response==true){
+                let user = response[1]
+                setUser(user)
+                buscar('')
+                Navigation.navigate('cadastros')
+            }
+        })
+
+    }
+
     return(
-        <Context.Provider value={{registrar, user, setUser,registros,setRegistros, isJson, buscar, moneyFormat}}>
+        <Context.Provider value={{apagar,editar, registrar, user, setUser,registros,setRegistros, isJson, buscar, moneyFormat, cpfFormat}}>
             {children}
         </Context.Provider>
     )
